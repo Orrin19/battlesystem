@@ -1,0 +1,19 @@
+{
+  "name": "battlesystem",
+  "version": "1.0.0",
+  "description": "Automated EU4-based battle simulation system",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Orrin19/battlesystem.git"
+  },
+  "author": "Orrin19",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Orrin19/battlesystem/issues"
+  },
+  "homepage": "https://github.com/Orrin19/battlesystem#readme"
+}

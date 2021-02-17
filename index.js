@@ -3,7 +3,7 @@ let combatWidthDefence;
 let forcesAttack;
 let forcesDefence;
 
-function input() {
+function forces() {
     combatWidthAttack = 15;
     combatWidthDefence = 15;
     regimentsAttack = {
@@ -19,15 +19,26 @@ function input() {
     return combatWidthAttack, combatWidthDefence, forcesAttack, forcesDefence
 }
 
-
 function arrangement(combatWidthAttack, combatWidthDefence, forcesAttack, forcesDefence) {
+    let firstLineAttack = [];
+    regimentsAttack.infantry.sort();
+    regimentsAttack.cavalry.sort();
+    regimentsAttack.artillery.sort();
+    if (regimentsAttack.infantry.length >= combatWidthAttack) {
+        for (let i = 0; i < combatWidthAttack; i++) {
+            firstLineAttack.push(["infantry", ])
+        }
+    }
+    for (let i = 0; i < combatWidthAttack; i++) {
+        firstLineAttack[i] = [""]
+    }
+    console.log(regimentsAttack)
+}
+
+function battle(combatWidthAttack, combatWidthDefence, forcesAttack, forcesDefence) {
+    arrangement(combatWidthAttack, combatWidthDefence, forcesAttack, forcesDefence)
 
 }
 
-function battle() {
-    arrangement()
-
-}
-
-input()
-battle()
+forces()
+battle(combatWidthAttack, combatWidthDefence, forcesAttack, forcesDefence)

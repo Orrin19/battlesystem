@@ -1,46 +1,52 @@
-let combatWidthAttack;
-let combatWidthDefence;
-let regimentsAttack;
-let regimentsDefence;
+class Side {
+    constructor(inf, cav, art, cw) {
+        this.branches = {};
+        this.branches.infantry = {};
+        this.branches.cavalry = {};
+        this.branches.artillery = {};
 
-function forces() {
-    combatWidthAttack = 15;
-    combatWidthDefence = 15;
-    regimentsAttack = {
-        "infantry": [0.9, 1, 1, 0.4, 0.8],
-        "cavalry": [1, 1, 0.7],
-        "artillery": [1, 1, 1, 1, 1]
-    };
-    regimentsDefence = {
-        "infantry": [0.9, 1, 1, 0.9],
-        "cavalry": [1, 0.2, 0.6, 1, 0.9],
-        "artillery": [1, 1, 1, 1, 1]
-    };
-    return combatWidthAttack, combatWidthDefence, regimentsAttack, regimentsDefence
-}
-
-function arrangement(combatWidthAttack, combatWidthDefence, regimentsAttack, regimentsDefence) {
-    let firstLineAttack = [];
-    let secondLineAttack = [];
-    let reserveAttack = [];
-    regimentsAttack.infantry.sort();
-    regimentsAttack.cavalry.sort();
-    regimentsAttack.artillery.sort();
-    if (regimentsAttack.infantry.length >= combatWidthAttack) {
-        for (let i = 0; i < combatWidthAttack; i++) {
-            firstLineAttack.push(["infantry", ])
-        }
+        this.branches.infantry.total = inf;
+        this.branches.cavalry.total = cav;
+        this.branches.artillery.total = art;
+        this.combatWidth = cw;
     }
-    for (let i = 0; i < combatWidthAttack; i++) {
-        firstLineAttack[i] = [""]
+}
+
+const arrangement = (attack, defense) => {
+    attack.branches.infantry.filled = Math.floor(attack.branches.infantry.total / 1000);
+    attack.branches.infantry.regiments = [];
+    for (let i = 0; i < attack.branches.infantry.filled; i++) {
+        attack.branches.infantry.regiments.push(1000);
     }
-    console.log(regimentsAttack)
+    attack.branches.infantry.regiments.push(attack.branches.infantry.total - (1000 * attack.branches.infantry.filled));
+
+    attack.branches.cavalry.filled = Math.floor(attack.branches.cavalry.total / 1000);
+    attack.branches.cavalry.regiments = [];
+    for (let i = 0; i < attack.branches.cavalry.filled; i++) {
+        attack.branches.cavalry.regiments.push(1000);
+    }
+    attack.branches.cavalry.regiments.push(attack.branches.cavalry.total - (1000 * attack.branches.cavalry.filled));
+
+    attack.branches.artillery.filled = Math.floor(attack.branches.artillery.total / 1000);
+    attack.branches.artillery.regiments = [];
+    for (let i = 0; i < attack.branches.artillery.filled; i++) {
+        attack.branches.artillery.regiments.push(1000);
+    }
+    attack.branches.artillery.regiments.push(attack.branches.artillery.total - (1000 * attack.branches.artillery.filled));
+
+    console.log(attack.branches.infantry.regiments + ' ' + attack.branches.cavalry.regiments + ' ' + attack.branches.artillery.regiments);
 }
 
-function battle(combatWidthAttack, combatWidthDefence, regimentsAttack, regimentsDefence) {
-    arrangement(combatWidthAttack, combatWidthDefence, regimentsAttack, regimentsDefence)
+const battle = (attack, defense) => {
+    arrangement(attack, defense);
 
 }
 
-forces()
-battle(combatWidthAttack, combatWidthDefence, regimentsAttack, regimentsDefence)
+
+
+
+let attack = new Side(4900, 1200, 2400, 15);
+let defense = new Side(4200, 1500, 3200, 15);
+
+
+battle(attack, defense);
